@@ -12,3 +12,20 @@ Download Node.js per Windows:
 ```
 https://nodejs.org/en/download
 ```
+Durante l'installazione, ricorda di aggiungere nodejs al path. Inoltre, in fase di installazione verrà richiesto più volte in powershell di premere enter per installare tutte le dipendenze necessarie. Attendi finchè l'installazione non sarà conclusa (potrebbero volerci diversi minuti). A questo punto, verifica l'installazione da terminale:
+
+```
+node -v
+```
+Se nodejs è correttaemente installato, procediamo alla creazione di una cartella e poniamoci in VS Code. 
+
+Adesso installiamo globalmente la CLI per Nodejs:
+```
+npm i -g @nestjs/cli
+```
+
+Creiamo un nuovo progetto con il comando:
+```
+nest new project-name
+```
+Dopo questo comando, mi viene chiesto quale package manager vogliamo usare; selezioniamo npm.
