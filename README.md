@@ -39,6 +39,7 @@ Se voglio runnare l'applicazione e vedere tutti i log:
 npm run start:dev
 ```
 ## Struttura del progetto
+### Componenti di default
 Quando creo il progetto, si crea una struttura di default che contiene una directory src:
 ```
 src
@@ -122,4 +123,59 @@ async function bootstrap() {
 }
 bootstrap();
 ```
+### Componenti aggiuntivi
+Se voglio creare un altro modulo sotto la cartella src 
+```
+nest g module module-name
+```
+Questo comando andrà a creare il file module-name.modules.ts sotto la cartella module-name. 
+```
+src
+   - module-name
+         - module-name.modules.ts
+   -  app.controller.spec.ts
+   -  app.controller.ts
+   -  app.module.ts
+   -  app.service.ts
+   -  main.ts
+```
 
+Quando aggiungo un nuovo modulo, questo verrà aggiunto in automatico negli import di app.modules.ts, che costituisce il modulo principale.
+
+Se voglio aggiungere un controller sotto la cartella module-name:
+
+```
+nest g controller module-name
+```
+A questo punto il progetto avrà struttura:
+```
+src
+   - module-name
+         - module-name.modules.ts
+         - module-name.controller.spec.ts
+         - module-name.controller.ts
+   -  app.controller.spec.ts
+   -  app.controller.ts
+   -  app.module.ts
+   -  app.service.ts
+   -  main.ts
+```
+Allo stesso modo, se voglio aggiungere un servizio:
+```
+nest g service module-name
+```
+La struttura del progetto sarà quindi:
+```
+src
+   - module-name
+         - module-name.modules.ts
+         - module-name.controller.spec.ts
+         - module-name.controller.
+         - module-name.service.spec.ts
+         - module-name.service.ts
+   -  app.controller.spec.ts
+   -  app.controller.ts
+   -  app.module.ts
+   -  app.service.ts
+   -  main.ts
+```
