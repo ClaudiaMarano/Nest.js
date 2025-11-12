@@ -6,7 +6,7 @@ Nest si avvale di robusti framework HTTP Server come **Express** (predefinito).
 
 Nest offre un livello di astrazione superiore rispetto ai comuni framework Node.js (Express/Fastify), ma espone anche le loro API direttamente allo sviluppatore. Questo offre agli sviluppatori la libertà di utilizzare la miriade di moduli di terze parti disponibili per la piattaforma sottostante.
 
-## Installazione
+## Installazione e Setup
 
 Download Node.js per Windows:
 ```
@@ -123,6 +123,9 @@ async function bootstrap() {
 }
 bootstrap();
 ```
+NestFactory espone alcuni metodi statici che consentono di creare un'istanza dell'applicazione.
+Nell'esempio main.ts sopra, avviamo semplicemente il nostro listener HTTP, che consente all'applicazione di attendere le richieste HTTP in ingresso.
+
 ### Componenti aggiuntivi
 Se voglio creare un altro modulo sotto la cartella src 
 ```
@@ -179,3 +182,45 @@ src
    -  app.service.ts
    -  main.ts
 ```
+### Linting e Formattazione
+Un progetto Nest viene fornito con un linter di codice e un formattatore preinstallati (rispettivamente eslint e prettier).
+```
+# Lint and autofix with eslint
+$ npm run lint
+
+# Format with prettier
+$ npm run format
+```
+## Componenti principali
+### 1. Controllers
+Un controller riceve le richieste HTTP dal client (GET, POST, ecc.), chiama la logica dai services, e restituisce la risposta al client. 
+
+Ogni controller deve gestire delle specifiche richieste; il meccanismo di routing decide a quale controller passare la richiesta. 
+
+Per creare un controller, si usa una classe TypeScript decorata con @Controller()
+
+
+
+### 2. Providers
+
+
+### 3. Modules
+
+
+
+### 4. Middleware
+
+
+### 5. Exception Filters
+
+
+### 6. Pipes
+
+
+### 7. Guards
+
+
+### 8. Interceptors
+
+
+### 9. Custom Decorators
