@@ -28,4 +28,98 @@ Creiamo un nuovo progetto con il comando:
 ```
 nest new project-name
 ```
-Dopo questo comando, mi viene chiesto quale package manager vogliamo usare; selezioniamo npm.
+Dopo questo comando, mi viene chiesto quale package manager vogliamo usare; selezioniamo npm. 
+
+A questo punto il progetto sarà creato e inizializzato. Per runnare la nostra applicazione nestjs entro nella cartella creata e digito il comando:
+```
+npm run start
+```
+Se voglio runnare l'applicazione e vedere tutti i log:
+```
+npm run start:dev
+```
+## Struttura del progetto
+Quando creo il progetto, si crea una struttura di default che contiene una directory src:
+```
+src
+   -  app.controller.spec.ts
+   -  app.controller.ts
+   -  app.module.ts
+   -  app.service.ts
+   -  main.ts
+```
+Guardiamo nello specifico i file creati.
+
+- **app.controller.spec.ts**: Un controller di base con un singolo percorso.
+```
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+describe('AppController', () => {
+  let appController: AppController;
+
+  beforeEach(async () => {
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+      providers: [AppService],
+    }).compile();
+
+    appController = app.get<AppController>(AppController);
+  });
+```
+
+- **app.controller.ts**: Le unità di test per il controller.
+```
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
+}
+```
+
+- **app.module.ts**: Il modulo principale dell'applicazione (root)
+```
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+@Module({
+  imports: [],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
+```
+
+- **app.service.ts**: Un servizio di base con un solo metodo.
+```
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class AppService {
+  getHello(): string {
+    return 'Hello World!';
+  }
+}
+```
+
+- **main.ts**: Il file di ingresso dell'applicazione che utilizza la funzione principale NestFactory per creare un'istanza dell'applicazione Nest.
+```
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(process.env.PORT ?? 3000);
+}
+bootstrap();
+```
+
